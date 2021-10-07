@@ -18,9 +18,9 @@ func TestArea(t *testing.T) {
 		shape Shape
 		want  float64
 	}{
-		{"Rectangle", Rectangle{12.0, 6.0}, 72.0},
-		{"Circle", Circle{10.0}, 314.1592653589793},
-		{"Triangle", Triangle{12, 6}, 36.0},
+		{name: "Rectangle", shape: Rectangle{12.0, 6.0}, want: 72.0},
+		{name: "Circle", shape: Circle{10.0}, want: 314.1592653589793},
+		{name: "Triangle", shape: Triangle{12, 6}, want: 36.0},
 	}
 
 	checkArea := func(t testing.TB, shape Shape, want float64) {
