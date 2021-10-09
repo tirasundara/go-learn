@@ -30,3 +30,15 @@ func TestWallet(t *testing.T) {
 		assertBalance(t, wallet, want)
 	})
 }
+
+func TestBitcoin(t *testing.T) {
+	t.Run("String()", func(t *testing.T) {
+		bitcoin := Bitcoin(10)
+		got := bitcoin.String()
+		want := "10 BTC"
+
+		if got != want {
+			t.Errorf("got %s want %s", got, want)
+		}
+	})
+}
