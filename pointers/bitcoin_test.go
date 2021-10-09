@@ -2,6 +2,7 @@ package pointers
 
 import "testing"
 
+// TestWallet
 func TestWallet(t *testing.T) {
 	assertBalance := func(t testing.TB, wallet Wallet, want Bitcoin) {
 		t.Helper()
