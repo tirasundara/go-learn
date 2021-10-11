@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 
 	"github.com/tirasundara/go-learn/depinject"
@@ -13,4 +15,7 @@ func main() {
 
 	fmt.Println(hello.Hello(name, "Spanish"))
 	depinject.Greet(os.Stdout, name)
+
+	// The Internet
+	log.Fatal(http.ListenAndServe(":5000", http.HandlerFunc(depinject.MyGreetHandler)))
 }
