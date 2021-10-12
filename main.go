@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
 	"os"
 
 	"github.com/tirasundara/go-learn/depinject"
 	"github.com/tirasundara/go-learn/hello"
+	"github.com/tirasundara/go-learn/mocks"
 )
 
 func main() {
@@ -16,6 +15,10 @@ func main() {
 	fmt.Println(hello.Hello(name, "Spanish"))
 	depinject.Greet(os.Stdout, name)
 
+	fmt.Println("")
+
+	mocks.Countdown(os.Stdout)
+
 	// The Internet
-	log.Fatal(http.ListenAndServe(":5000", http.HandlerFunc(depinject.MyGreetHandler)))
+	// log.Fatal(http.ListenAndServe(":5000", http.HandlerFunc(depinject.MyGreetHandler)))
 }
