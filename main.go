@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/tirasundara/go-learn/depinject"
 	"github.com/tirasundara/go-learn/hello"
@@ -17,7 +18,10 @@ func main() {
 
 	fmt.Println("")
 
-	sleeper := &mocks.DefaultSleeper{}
+	sleeper := &mocks.ConfigurableSleeper{
+		Duration:  1 * time.Second,
+		SleepFunc: time.Sleep,
+	}
 	mocks.Countdown(os.Stdout, sleeper)
 
 	// The Internet
