@@ -17,7 +17,8 @@ func main() {
 
 	fmt.Println("")
 
-	mocks.Countdown(os.Stdout)
+	sleeper := &mocks.DefaultSleeper{}
+	mocks.Countdown(os.Stdout, sleeper)
 
 	// The Internet
 	// log.Fatal(http.ListenAndServe(":5000", http.HandlerFunc(depinject.MyGreetHandler)))
