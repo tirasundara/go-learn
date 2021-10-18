@@ -11,12 +11,12 @@ func walk(x interface{}, fn func(input string)) {
 	switch v.Kind() {
 	case reflect.String:
 		fn(v.String())
-	case reflect.Slice:
-		numberOfValues = v.Len()
-		getField = v.Index
 	case reflect.Struct:
 		numberOfValues = v.NumField()
 		getField = v.Field
+	case reflect.Slice, reflect.Array:
+		numberOfValues = v.Len()
+		getField = v.Index
 	}
 
 	for i := 0; i < numberOfValues; i++ {
