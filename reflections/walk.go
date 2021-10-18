@@ -5,20 +5,28 @@ import "reflect"
 func walk(x interface{}, fn func(input string)) {
 	v := getValue(x)
 
+	walkValue := func(r reflect.Value) {
+		walk(r.Interface(), fn)
+	}
+
 	switch v.Kind() {
 	case reflect.String:
 		fn(v.String())
 	case reflect.Struct:
 		for i := 0; i < v.NumField(); i++ {
-			walk(v.Field(i).Interface(), fn)
+			walkValue(v.Field(i))
 		}
 	case reflect.Slice, reflect.Array:
 		for i := 0; i < v.Len(); i++ {
-			walk(v.Index(i).Interface(), fn)
+			walkValue(v.Index(i))
 		}
 	case reflect.Map:
 		for _, key := range v.MapKeys() {
-			walk(v.MapIndex(key).Interface(), fn)
+			walkValue(v.MapIndex(key))
+		}
+	case reflect.Chan:
+		for val, ok := v.Recv(); ok; val, ok = v.Recv() {
+			walkValue(val)
 		}
 	}
 }
